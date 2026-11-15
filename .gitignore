@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.env
+data/raw/*.csv
+data/incoming/*.csv
+data/archive/*.csv
+data/warehouse/*.duckdb
+data/parquet/*
+!data/**/.gitkeep
+
+.venv/
+airflow_home/
+.DS_Store
+data/warehouse/*.duckdb.wal
