@@ -24,4 +24,8 @@ if [ "$(uname)" = Darwin ]; then   # see scripts/macos_shim/setproctitle/__init_
   cp -R scripts/macos_shim/setproctitle "$SITE/"
   cp scripts/macos_shim/sitecustomize.py "$SITE/"
 fi
+# the sales file is stored gzipped in git (GitHub's 100 MB file limit); unpack it once
+if [ ! -f data/raw/05_pharmacy_sales_data.csv ] && [ -f data/raw/05_pharmacy_sales_data.csv.gz ]; then
+  gunzip -k data/raw/05_pharmacy_sales_data.csv.gz
+fi
 echo "Setup done. Next: bash scripts/start_airflow.sh"

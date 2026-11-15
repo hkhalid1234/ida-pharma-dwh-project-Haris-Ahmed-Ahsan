@@ -23,13 +23,16 @@ Oversampling -> Ingestion (file-watcher) -> Postgres staging/ODS + validation ->
 | `scripts/` | `setup_local.sh`, `start_airflow.sh`, `stop_airflow.sh`, `run_refresh.sh`, `run_watcher.py` (stand-alone file-watcher) |
 | `api/ingest_api.py` | FastAPI ingestion endpoint (upload a batch file / trigger ingestion) |
 | `tests/` | End-to-end test on synthetic data (`python tests/test_pipeline.py`) |
+| `data/raw/` | Phase 1 source data from the course dataset (01, 05 gzipped, 06) |
+| `data/generated/` | The batches our generator produced for refresh 1 (Jan 2026) and refresh 2 (Feb 2026), kept as evidence for the oversampling layer |
 
 ## Run it locally (no Docker)
 Runs natively on macOS (tested on Apple Silicon). Needs [Homebrew](https://brew.sh) and [uv](https://docs.astral.sh/uv/).
 
-1. **Data.** From the course dataset zip, copy these three files into `data/raw/`:
-   `01_master_data.csv`, `05_pharmacy_sales_data.csv`, `06_hospital_demand_data.csv`
-   (the other four files belong to Phases 2-3). CSVs are git-ignored because they are large.
+1. **Data.** The three Phase 1 source files are already in `data/raw/`: `01_master_data.csv`,
+   `06_hospital_demand_data.csv` and `05_pharmacy_sales_data.csv.gz`. The sales file is gzipped because
+   218 MB is over GitHub's 100 MB file limit; `setup_local.sh` unpacks it. The other four dataset files
+   belong to Phases 2-3.
 2. **One-time setup.** Installs Postgres 16 (Homebrew service) with the `staging` and `airflow` databases,
    and a Python 3.11 virtualenv with Airflow 2.10.5:
    ```bash

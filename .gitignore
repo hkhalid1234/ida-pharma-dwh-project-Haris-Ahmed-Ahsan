@@ -1,7 +1,8 @@
 __pycache__/
 *.pyc
 .env
-data/raw/*.csv
+# the sales CSV (218 MB) is over GitHub's 100 MB file limit, so only the .csv.gz is committed
+data/raw/05_pharmacy_sales_data.csv
 data/incoming/*.csv
 data/archive/*.csv
 data/warehouse/*.duckdb
