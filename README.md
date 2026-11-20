@@ -1,18 +1,31 @@
 # SDI Data Mart - Phase 1 (Sales & Demand Intelligence)
 
-Intelligent Data Architectures, Fall 2026 - Pharmaceutical Cold Supply Chain project.
-**Milestone 1:** Apache Airflow pipeline up to the analytical query layer, with the double refresh.
+Intelligent Data Architectures (Fall 2026) - Pharmaceutical Cold Supply Chain Project.  
+**Milestone 1:** Automated Apache Airflow pipeline up to analytical query layer with double refresh.
 
-**Team:** Ahsan Imran, Haris Khalid, Syed Ahmed Farrukh
+### Group Members:
+* **Ahsan Imran** (ERP: 28376 | a.imran.28376@khi.iba.edu.pk)
+* **Haris Khalid**
+* **Syed Ahmed Farrukh**
+
+---
+
+## Milestone 1 Required Deliverables
+
+| Deliverable Name | File / Location | Description |
+| :--- | :--- | :--- |
+| **1) Milestone.1.SDI.DWH.Report** | [`Milestone.1.SDI.DWH.Report.pdf`](Milestone.1.SDI.DWH.Report.pdf) | Technical report (3 pages, strictly under 5) covering Airflow pipeline design, implementation problems and solutions, data engineering dashboards, DWH approach, and oversampling strategy. |
+| **2) Milestone.1.SDI.DWH.Excel** | [`Milestone.1.SDI.DWH.Excel.xlsx`](Milestone.1.SDI.DWH.Excel.xlsx) | Comprehensive Kimball DWH design workbook (Business & OLTP X-Ray, transforms, dimensions, facts, star schema). |
+| **3) Milestone.1.SDI.DWH.Video** | [`Milestone.1.SDI.DWH.Video`](#demo-video) | Demo walkthrough (under 5 mins) explaining end-to-end pipeline execution and results. Link provided in submission.txt and below. |
+| **4) All Code** | [`dags/`](dags/), [`include/sdi/`](include/sdi/), [`api/`](api/) | Modular Airflow DAG, DDL, SQL queries, ingestion file-watcher, validation rules, transforms, and query benchmarks. |
+| **5) Oversampled Data Folder & Dictionary** | [`data/generated/`](data/generated/), [`data/generated/DATA_DICTIONARY.md`](data/generated/DATA_DICTIONARY.md) | Generated refresh batches (R01 Jan 2026, R02 Feb 2026) along with comprehensive column data dictionary. |
 
 ```
 Oversampling -> Ingestion (file-watcher) -> Postgres staging/ODS + validation -> Transform (SCD 1/2, junk, role-playing)
   -> DuckDB star schema / fact constellation (2 facts, 7 dims) -> Query layer (indexes, aggregates, Parquet, timed queries)
 ```
 
-- Design, methodology and assumptions: [`SDI_Phase1_Milestone1_Report.pdf`](SDI_Phase1_Milestone1_Report.pdf)
-- Data-model design workbook: [`docs/SDI_DWH_Design_Phase1.xlsx`](docs/SDI_DWH_Design_Phase1.xlsx)
-- Demo video: Linked in project submission / repository.
+- **Demo video link:** Linked in submission text file (`submission.txt`).
 
 ## Repository layout
 | Path | Purpose |
