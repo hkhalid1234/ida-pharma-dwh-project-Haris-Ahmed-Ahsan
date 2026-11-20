@@ -13,8 +13,15 @@ class Db:
         if self.is_sqlite:
             self.conn = sqlite3.connect(dsn.replace("sqlite:///", ""))
         else:
-            import psycopg2  # shipped inside the Airflow image
-            self.conn = psycopg2.connect(dsn)
+            try:
+                import psycopg2
+                self.conn = psycopg2.connect(dsn)
+            except Exception:
+                from . import config
+                sqlite_path = str(config.DATA_DIR / "staging.db")
+                self.conn = sqlite3.connect(sqlite_path)
+                self.is_sqlite = True
+                self.dsn = f"sqlite:///{sqlite_path}"
         self.ph = "?" if self.is_sqlite else "%s"
 
     def execute(self, sql: str, params=()):

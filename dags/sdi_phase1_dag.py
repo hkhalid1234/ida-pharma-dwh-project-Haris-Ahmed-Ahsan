@@ -64,7 +64,7 @@ def sdi_phase1_pipeline():
         config, generator, ingestion, query_layer, transform, validation, Db, DuckWarehouse = _sdi()
         db = Db(config.STAGING_DSN)
         ingestion.ensure_ops_tables(db)
-        db.script((config.SQL_DIR / "ops_views.sql").read_text())   # dashboard views (Grafana, Milestone 2)
+        db.script((config.SQL_DIR / "ops_views.sql").read_text(encoding="utf-8"))   # dashboard views (Grafana, Milestone 2)
         wh = DuckWarehouse(config.DUCKDB_PATH); wh.ensure_schema(); wh.close()
         for d in (config.INCOMING_DIR, config.ARCHIVE_DIR, config.PARQUET_DIR):
             d.mkdir(parents=True, exist_ok=True)

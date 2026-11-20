@@ -17,7 +17,7 @@ DIM_TABLES = ["DimDate", "DimLocation", "DimMedicine", "DimPharmacy", "DimHospit
 
 def _run_script(wh, path: Path):
     from .warehouse import _statements
-    for stmt in _statements(path.read_text()):
+    for stmt in _statements(path.read_text(encoding="utf-8")):
         wh.execute(stmt)
 
 
@@ -57,7 +57,7 @@ def optimise(wh, parquet_dir: Path | None = None) -> dict:
 
 # ------------------------------------------------------------------ query catalogue + benchmark
 def load_queries() -> dict[str, dict[str, str]]:
-    text = (SQL_DIR / "queries.sql").read_text()
+    text = (SQL_DIR / "queries.sql").read_text(encoding="utf-8")
     out: dict[str, dict[str, str]] = {}
     for block in re.split(r"(?m)^-- name: ", text)[1:]:
         header, _, body = block.partition("\n")

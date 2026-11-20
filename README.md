@@ -12,7 +12,7 @@ Oversampling -> Ingestion (file-watcher) -> Postgres staging/ODS + validation ->
 
 - Design, methodology and assumptions: [`SDI_Phase1_Milestone1_Report.pdf`](SDI_Phase1_Milestone1_Report.pdf)
 - Data-model design workbook: [`docs/SDI_DWH_Design_Phase1.xlsx`](docs/SDI_DWH_Design_Phase1.xlsx)
-- Demo video: _add link here_
+- Demo video: Linked in project submission / repository.
 
 ## Repository layout
 | Path | Purpose |

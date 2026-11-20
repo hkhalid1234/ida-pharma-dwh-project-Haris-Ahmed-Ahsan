@@ -16,7 +16,7 @@ def _statements(sql: str):
 
 class BaseWarehouse:
     def ensure_schema(self):
-        for stmt in _statements(SCHEMA_SQL.read_text()):
+        for stmt in _statements(SCHEMA_SQL.read_text(encoding="utf-8")):
             self.execute(stmt)
 
     def table_exists_nonempty(self, table: str) -> bool:

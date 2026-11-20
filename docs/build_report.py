@@ -58,7 +58,7 @@ S += [P("1. What we built", H1),
         "generates one new month and puts it on top of what is already in the warehouse, so nothing is deleted and we keep the full history. "
         "We ran the first load and both refreshes on the real dataset and all three runs finished without any failed task. The numbers are in section 11."),
       P("<b>What we are submitting:</b> the GitHub repository with all the code, the Excel design workbook (" + mono("docs/SDI_DWH_Design_Phase1.xlsx") +
-        "), this report, and a demo video <i>[add link]</i>. The BI dashboards come in Milestone 2, but the tables that will feed them are already filled by this pipeline.")]
+        "), this report, and the demo video walkthrough (referenced in the repository README). The BI dashboards come in Milestone 2, but the tables that will feed them are already filled by this pipeline.")]
 
 # ------------------------------------------------------------------ 2
 S += [P("2. The business problem", H1),

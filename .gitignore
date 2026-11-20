@@ -13,3 +13,6 @@ data/parquet/*
 airflow_home/
 .DS_Store
 data/warehouse/*.duckdb.wal
+*.db
+data/*.db
+docs/DEMO_VIDEO_SCRIPT.md
