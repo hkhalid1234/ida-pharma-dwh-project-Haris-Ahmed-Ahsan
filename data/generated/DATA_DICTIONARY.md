@@ -1,7 +1,7 @@
 # Oversampled Data Dictionary - Phase 1 (SDI Data Mart)
 **Course:** Intelligent Data Architectures (Fall 2026)  
 **Deliverable:** Milestone 1 - Oversampled data folder along with data dictionary  
-**Team:** Ahsan Imran (28376), Haris Khalid, Syed Ahmed Farrukh  
+**Team:** Ahsan Imran (28376), Haris Khalid (28557), Syed Ahmed Farrukh (28543)  
 
 ---
 
