@@ -83,7 +83,7 @@ S += [P("3. Data Oversampling Strategy &amp; Statistics (Requirement e)", H1),
 
 # 4. Design of Airflow pipeline
 S += [P("4. Design of the Airflow Pipeline &amp; Ingestion (Requirement a)", H1),
-      Image("architecture.png", width=14.5 * cm, height=14.5 * cm * 0.4856),
+      Image("airflow_dag.png", width=16.5 * cm, height=16.5 * cm * (3.8 / 12.0)),
       Spacer(1, 2),
       P(mono("init_infra &gt; choose_path &gt; [seed_historical | oversampling] &gt; wait_for_files &gt; ingestion &gt; validate_data &gt; transform_load &gt; query_layer &gt; storage_metrics &gt; end"),
         ParagraphStyle("c", parent=CODE, fontSize=7.4)),
@@ -105,7 +105,14 @@ S += [P("5. Implementation Problems Faced and Solutions (Requirement b)", H1),
 
 # 6. Explanation of data engineering dashboards
 S += [P("6. Explanation of Data Engineering Observability Dashboards (Requirement c)", H1),
-      P("To monitor pipeline reliability, data quality, and query performance in real time (feeding Grafana and Milestone 2 BI tools), our staging and query layers continuously log observability metrics into dedicated PostgreSQL tables:"),
+      Image("de_dashboard.png", width=17.5 * cm, height=17.5 * cm * (4.8 / 13.5)),
+      Spacer(1, 2),
+      P("<b>Dashboard Narrative &amp; Story Told:</b> As required by the project specifications, our pipeline monitors real-time health across three core pillars shown in the dashboard visual above:"),
+      *bullets([
+          "<b>Batch Ingestion Panel (Left):</b> Horizontal bar chart displaying load duration (seconds) per source file. Demonstrates sub-second ingestion for all tables (hospital demand: 0.655s, pharmacy sales: 0.563s, master data: 0.096s) with a 100% batch success rate, confirming zero ingestion bottlenecks.",
+          "<b>Query Latency &amp; Optimization Panel (Center):</b> Column chart on a log scale comparing Base multi-fact star joins (red) against Pre-Aggregated summary tables (green) across queries Q1 to K6. Proves massive latency reductions across all analytical workloads, notably accelerating Q3 (unfulfilled hospital demand vs. store stock) from 5,203 ms down to 109 ms (a 47.4x speedup).",
+          "<b>Storage Footprint Panel (Right):</b> Donut chart tracking physical warehouse volume distribution. Confirms FactPharmacySales accounts for 94.6% of warehouse volume (555,603 rows) alongside FactHospitalDemand (28,728 rows) and staging dimensions (3,100 rows), verifying complete historical and multi-refresh retention."]),
+      P("These telemetry streams are continuously logged to dedicated PostgreSQL staging tables to power live Grafana dashboards:"),
       table([["Dashboard Domain", "Underlying Table / View", "Tracked Metrics &amp; Computation", "Analytical Purpose &amp; Story Told"],
              ["Batch Ingestion", "ops_batch_load_log<br/>v_batch_success_rate", "Batch Load Duration (seconds), Rows Loaded, Batch Success Rate (100.0 * ok / total).", "Identifies file ingestion bottlenecks and guarantees zero unhandled pipeline failures across source domains."],
              ["Data Validation &amp; Quality", "stg_rejects", "Rejection counts grouped by rule (e.g. quantity_positive, price_positive, sku_not_null).", "Monitors source data quality trends, proving that corrupted records are caught before contaminating OLAP facts."],

@@ -1,0 +1,62 @@
+================================================================================
+COURSE: Intelligent Data Architectures (Fall 2026)
+PROJECT: Pharmaceutical Cold Supply Chain Data Warehouse & BI Pipeline
+DELIVERABLE: Milestone 1 - Sales & Demand Intelligence (SDI) Data Mart
+================================================================================
+
+1. GITHUB REPOSITORY & PROFILE LINK:
+   https://github.com/hkhalid1234/ida-pharma-dwh-project-Haris-Ahmed-Ahsan
+
+2. GROUP MEMBERS & INFORMATION:
+   * Ahsan Imran       | ERP: 28376 | Email: a.imran.28376@khi.iba.edu.pk
+   * Haris Khalid      | ERP: 28557 | Email: h.khalid.28557@khi.iba.edu.pk
+   * Syed Ahmed Farrukh | ERP: 28543 | Email: s.farrukh.28543@khi.iba.edu.pk
+
+3. MILESTONE 1 DELIVERABLES CHECKLIST (ALL IN REPOSITORY):
+   -----------------------------------------------------------------------------
+   Deliverable 1: Project Report (PDF, strictly max 5 pages - actual 3 pages)
+   File in repo: Milestone.1.SDI.DWH.Report.pdf
+   Contents:
+     a) Design of Apache Airflow DAG pipeline with graph view visual
+     b) Implementation problems faced (worker deadlocks, SCD-2 mutation, overflows) and solutions
+     c) Data engineering observability dashboards (Batch ingestion, Storage, Query benchmarks)
+     d) DWH problem-solving approach and Kimball constellation architecture
+     e) Data oversampling strategy, seasonal logic, and anomaly generation stats
+
+   Deliverable 2: Kimball DWH Design Excel File
+   File in repo: Milestone.1.SDI.DWH.Excel.xlsx
+   Contents: Business & OLTP X-Ray, Staging mapping, Dimensions, Facts, Bus Matrix, Star Schema
+
+   Deliverable 3: Demo Walkthrough Video (max 5 mins)
+   File in repo: Milestone 1 Demo.mp4
+   Contents: Full live walkthrough covering Airflow DAG, 2x data refresh execution,
+             SCD Type 2 versioning, 47x query speedup benchmarks, and web portal dashboard.
+
+   Deliverable 4: All Pipeline Code
+   Files in repo:
+     - Airflow DAG: dags/sdi_phase1_dag.py
+     - Data Ingestion & Staging: include/sdi/ingestion.py, include/sdi/db.py
+     - Warehouse & Transforms: include/sdi/warehouse.py, include/sdi/transform.py
+     - SQL Layers (L1-L4): include/sdi/sql/ (star_schema.sql, aggregates.sql, indexes.sql, queries.sql, ops_views.sql)
+     - REST API & Portal: api/ingest_api.py
+     - Automated Verification: tests/test_pipeline.py
+
+   Deliverable 5: Oversampled Data Folder & Complete Data Dictionary
+   Folder in repo: data/generated/
+   Data batches: 01_master_data__R01.csv, 01_master_data__R02.csv,
+                 05_pharmacy_sales_data__R01.csv, 05_pharmacy_sales_data__R02.csv,
+                 06_hospital_demand_data__R01.csv, 06_hospital_demand_data__R02.csv
+   Dictionary:   data/generated/DATA_DICTIONARY.md (100% complete, 120/120 columns documented)
+
+4. PIPELINE EXECUTION & BENCHMARK SUMMARY:
+   * Architecture: Fact Constellation (FactPharmacySales + FactHospitalDemand)
+   * Double Refresh: Successfully executed Release 1 (+592 sales, +756 demand, 2 caught rejects)
+                     and Release 2 (+544 sales, +756 demand, 3 SCD-2 versions, 2 caught rejects).
+   * Cumulative Fact Volume: 555,603 rows (FactPharmacySales) + 28,728 rows (FactHospitalDemand).
+   * Query Latency Gains:
+     - Q1 (Regional Sales): Base: 93.19 ms  --> Optimized: 38.08 ms (2.4x speedup)
+     - Q3 (Unfulfilled Demand): Base: 5,203.23 ms --> Optimized: 109.81 ms (47.4x speedup)
+     - K4 (Channel Margin): Base: 195.59 ms --> Optimized: 66.44 ms (2.9x speedup)
+     - K5 (Top Movers):     Base: 209.28 ms --> Optimized: 78.47 ms (2.7x speedup)
+   * Observability: 100% batch success rate, 0 orphan keys, real-time logging to ops_* tables.
+================================================================================
